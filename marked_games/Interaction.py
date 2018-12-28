@@ -6,7 +6,7 @@ class Player:
 
         self.marker = params['marker']
         self.strategy = params['strategy']
-        self.wealth = get(params, 'wealth', 0)
+        self.wealth = params.get('wealth', 0)
 
     def get_response(self, other_player):
 
