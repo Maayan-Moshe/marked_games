@@ -37,8 +37,8 @@ class Interaction:
 
         res_a = player_a.get_response(player_b)
         res_b = player_b.get_response(player_a)
-        player_a.wealth += self.tables['a'][res_a, res_b]
-        player_b.wealth += self.tables['b'][res_b, res_a]
+        player_a.wealth += self.tables['a'][res_a][res_b]
+        player_b.wealth += self.tables['b'][res_b][res_a]
     
 class Universe:
 
@@ -67,17 +67,17 @@ class Universe:
 
         self.players = new_players
 
-    def __do_interations(self):
+    def __do_interactions(self):
 
-        indexes = range(len(self.players))
-        while len(indexes) > 1:
-            player_a = self.__get_player(indexes)
-            player_b = self.__get_player(indexes)
+        indices = list(range(len(self.players)))
+        while len(indices) > 1:
+            player_a = self.__get_player(indices)
+            player_b = self.__get_player(indices)
             self.interaction.interact(player_a, player_b)
 
-    def __get_player(self, indexes):
+    def __get_player(self, indices):
 
-        pre_a = np.random.randrange(len(indexes))
-        index_a = indexes[pre_a]
-        del indexes[pre_a]
+        pre_a = np.random.randint(len(indices))
+        index_a = indices[pre_a]
+        del indices[pre_a]
         return self.players[index_a]
