@@ -4,40 +4,22 @@ import manager
 print ("Loaded Testing file")
 
 
-
-
-
 import unittest
 
-class TestInteraction(unittest.TestCase):
+class TestManager(unittest.TestCase):
 
 	table = np.array([[1,0],[0,2]])
 
-	def test_wealth_growth_diag(self):
+	def test_manager(self):
 
 		pl1, pl2 = get_two_players({'red':0,'blue':1}, {'red':1,'blue':1})
-
-		print (pl1.get_name())
 		interact=Interaction.Interaction(self.table)
 		interact.interact(pl1,pl2)
-		new_wealth_pl1=pl1.wealth
-		new_wealth_pl2=pl2.wealth
-		self.assertEqual(new_wealth_pl1,self.table[1,1])
-		self.assertEqual(new_wealth_pl2,self.table[1,1])
 
-	def test_wealth_growth_nd(self):
-
-		pl1, pl2 = get_two_players({'red':0,'blue':0}, {'red':1,'blue':1})
-		interact=Interaction.Interaction(self.table)
-		interact.interact(pl1,pl2)
-		new_wealth_pl1=pl1.wealth
-		new_wealth_pl2=pl2.wealth
-		self.assertEqual(new_wealth_pl1,self.table[0,1])
-		self.assertEqual(new_wealth_pl2,self.table[1,0])
-
-
-
-
+		players=[pl1,pl2]
+		Uni=Interaction.Universe(players,interact)
+		manag=manager.Manager(Uni)
+		manag.plot_and_update()
 
 def get_two_players(strat1,strat2):
 
